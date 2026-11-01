@@ -13,6 +13,11 @@
 <meta property="og:title" content="Linceintuitivo | Decoração de Interiores Concierge em Famalicão">
 <meta property="og:description" content="Decoração de interiores concierge em Famalicão, com acompanhamento personalizado, arquitetura e seleção de peças.">
 <meta property="og:image" content="https://images.unsplash.com/photo-1573599852326-2d4da0bbe613?auto=format&fit=crop&w=1200&q=80">
+<script>
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+ document.documentElement.classList.add('intro-pending');
+}
+</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -58,6 +63,16 @@
 </head>
 
 <body class="home">
+<div class="site-intro" id="site-intro">
+<div class="intro-curtain intro-curtain-left" aria-hidden="true"></div>
+<div class="intro-curtain intro-curtain-right" aria-hidden="true"></div>
+<div class="intro-content">
+<p class="intro-brand">LINCEINTUITIVO</p>
+<p class="intro-category">DECORAÇÃO DE INTERIORES · FAMALICÃO</p>
+<p class="intro-message" role="status">A preparar uma experiência à sua medida.</p>
+<div class="intro-progress" aria-hidden="true"><span></span></div>
+</div>
+</div>
 <header>
 <div class="header-inner container">
 <a href="index.html" class="logo" aria-label="LINCEINTUITIVO">
@@ -90,11 +105,11 @@
 <section class="proof" aria-label="Experiência e clientes">
 <div class="proof-inner container">
 <div class="proof-item reveal">
-<p class="proof-number"><span class="proof-value" data-count="40" aria-label="Mais de 40">40</span><span class="proof-suffix" aria-hidden="true">+</span></p>
+<p class="proof-number"><span class="proof-value" data-count="40" aria-label="Mais de 40">0</span><span class="proof-suffix" aria-hidden="true">+</span></p>
 <p class="proof-label">Anos de experiência<br>no mercado de luxo</p>
 </div>
 <div class="proof-item reveal">
-<p class="proof-number"><span class="proof-value" data-count="200" aria-label="Mais de 200">200</span><span class="proof-suffix" aria-hidden="true">+</span></p>
+<p class="proof-number"><span class="proof-value" data-count="200" aria-label="Mais de 200">0</span><span class="proof-suffix" aria-hidden="true">+</span></p>
 <p class="proof-label">Clientes satisfeitos</p>
 </div>
 </div>
@@ -359,6 +374,10 @@ if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion
   });
  },{threshold:0.6});
  document.querySelectorAll('.proof-value[data-count]').forEach(counter=>counterObserver.observe(counter));
+}else{
+ document.querySelectorAll('.proof-value[data-count]').forEach(counter=>{
+  counter.textContent=new Intl.NumberFormat('pt-PT').format(Number(counter.dataset.count));
+ });
 }
 
 const testimonialCarousel=document.querySelector('#testimonial-carousel');
@@ -369,6 +388,17 @@ if(testimonialCarousel){
  duplicateGroup.setAttribute('aria-hidden','true');
  duplicateGroup.querySelectorAll('[role]').forEach(element=>element.removeAttribute('role'));
  testimonialTrack.append(duplicateGroup);
+}
+
+const siteIntro=document.querySelector('#site-intro');
+if(siteIntro&&document.documentElement.classList.contains('intro-pending')){
+ window.setTimeout(()=>{
+  siteIntro.classList.add('is-leaving');
+  window.setTimeout(()=>{
+   siteIntro.remove();
+   document.documentElement.classList.remove('intro-pending');
+  },600);
+ },5200);
 }
 </script>
 </body>
