@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Contacte a LINCEINTUITIVO para colocar questões sobre investimento.">
+<link rel="canonical" href="https://www.linceintuitivo.com/investimento.html">
+<title>Investimento | LINCEINTUITIVO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Italiana&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<div class="header-inner container">
+<a href="index.html" class="logo" aria-label="LINCEINTUITIVO">
+<img src="images/logo-lince.png" alt="">
+<span class="logo-name">LINCEINTUITIVO</span>
+</a>
+<button class="menu-btn" aria-label="Abrir menu" aria-expanded="false">☰</button>
+<nav id="nav">
+<a href="index.html#inicio">Início</a>
+<a href="projetos.html">Projetos</a>
+<a href="index.html#interiores">Palacetes</a>
+<a href="index.html#processo">Processo</a>
+<a href="contactos.html">Contactos</a>
+<a href="visite-nos.html">Visite-nos</a>
+</nav>
+</div>
+</header>
+
+<main>
+<section class="page-hero">
+<div class="crumb"><a href="index.html">Início</a> / Investimento</div>
+<h1 class="serif">Investimento.</h1>
+<p>Para colocar uma questão sobre investimento, contacte a LINCEINTUITIVO.</p>
+</section>
+
+<section class="cta">
+<div class="eyebrow reveal">CONTACTOS</div>
+<h2 class="serif reveal">Fale <span class="gold">connosco.</span></h2>
+<div class="actions reveal">
+<a class="btn" href="contactos.html">Ver contactos</a>
+<a class="tlink" href="tel:+351960084431">Ligar · 960 084 431</a>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="footer-top">
+<a href="index.html" class="logo" aria-label="LINCEINTUITIVO">
+<img src="images/logo-lince.png" alt="">
+<span class="logo-name">LINCEINTUITIVO</span>
+</a>
+<div class="footer-links">
+<a href="projetos.html">Projetos</a>
+<a href="mobiliario.html">Peças</a>
+<a href="decoracao.html">Decoração</a>
+<a href="arquitetura.html">Arquitetura</a>
+<a href="compre-e-venda.html">Compre e Venda</a>
+<a href="investimento.html">Investimento</a>
+<a href="contactos.html">Contactos</a>
+<a href="visite-nos.html">Visite-nos</a>
+</div>
+</div>
+<div class="footer-bottom"><span>© <span id="year"></span> LINCEINTUITIVO. Todos os direitos reservados.</span></div>
+</footer>
+<script>
+const menuButton=document.querySelector('.menu-btn');
+const nav=document.querySelector('#nav');
+const hd=document.querySelector('header');
+const onScroll=()=>hd.classList.toggle('scrolled',window.scrollY>40);
+onScroll();window.addEventListener('scroll',onScroll,{passive:true});
+menuButton.addEventListener('click',()=>{
+ const open=nav.classList.toggle('open');
+ menuButton.setAttribute('aria-expanded',String(open));
+});
+nav.querySelectorAll('a').forEach(link=>link.addEventListener('click',()=>{
+ nav.classList.remove('open');
+ menuButton.setAttribute('aria-expanded','false');
+}));
+document.getElementById('year').textContent=new Date().getFullYear();
+if('IntersectionObserver' in window){
+ const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+  if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target);}
+ }),{threshold:0.1});
+ document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+}else{document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));}
+</script>
+</body>
+</html>
