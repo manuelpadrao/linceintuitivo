@@ -14,6 +14,7 @@
 <meta property="og:description" content="Decoração de interiores concierge em Famalicão, com acompanhamento personalizado, arquitetura e seleção de peças.">
 <meta property="og:image" content="https://images.unsplash.com/photo-1573599852326-2d4da0bbe613?auto=format&fit=crop&w=1200&q=80">
 <script>
+document.documentElement.classList.add('proof-pending');
 if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
  document.documentElement.classList.add('intro-pending');
 }
@@ -353,16 +354,26 @@ if('IntersectionObserver' in window){
  document.querySelectorAll('.reveal').forEach(el=>el.classList.add('visible'));
 }
 
-if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
- const numberFormat=new Intl.NumberFormat('pt-PT');
- const counterObserver=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-   if(!entry.isIntersecting)return;
-   const counter=entry.target;
+const numberFormat=new Intl.NumberFormat('pt-PT');
+const counters=Array.from(document.querySelectorAll('.proof-value[data-count]'));
+const animatedCounters=new WeakSet();
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let previousScrollY=window.scrollY;
+const startVisibleCounters=()=>{
+ const scrollingDown=window.scrollY>previousScrollY;
+ previousScrollY=window.scrollY;
+ if(!scrollingDown)return;
+ document.documentElement.classList.remove('proof-pending');
+ if(!reducedMotion){
+  counters.forEach(counter=>{
+   if(animatedCounters.has(counter))return;
+   const bounds=counter.getBoundingClientRect();
+   const visibleHeight=Math.max(0,Math.min(bounds.bottom,window.innerHeight)-Math.max(bounds.top,0));
+   if(visibleHeight/bounds.height<0.6)return;
+   animatedCounters.add(counter);
    const target=Number(counter.dataset.count);
    const duration=1800;
    const start=performance.now();
-   counter.textContent='0';
    const update=now=>{
     const progress=Math.min((now-start)/duration,1);
     const eased=1-Math.pow(1-progress,4);
@@ -370,15 +381,15 @@ if('IntersectionObserver' in window&&!window.matchMedia('(prefers-reduced-motion
     if(progress<1)requestAnimationFrame(update);
    };
    requestAnimationFrame(update);
-   counterObserver.unobserve(counter);
   });
- },{threshold:0.6});
- document.querySelectorAll('.proof-value[data-count]').forEach(counter=>counterObserver.observe(counter));
-}else{
- document.querySelectorAll('.proof-value[data-count]').forEach(counter=>{
-  counter.textContent=new Intl.NumberFormat('pt-PT').format(Number(counter.dataset.count));
+ }
+};
+if(reducedMotion){
+ counters.forEach(counter=>{
+  counter.textContent=numberFormat.format(Number(counter.dataset.count));
  });
 }
+window.addEventListener('scroll',startVisibleCounters,{passive:true});
 
 const testimonialCarousel=document.querySelector('#testimonial-carousel');
 if(testimonialCarousel){
