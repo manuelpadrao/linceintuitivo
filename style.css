@@ -237,10 +237,8 @@ footer{border-top:4px solid #c9a24a;border-image:var(--metal) 1;padding-block:cl
   .proof-label{font-size:10px;letter-spacing:1.2px}
   .manifesto.collection-intro{padding-block:var(--section-space)}
   .collection-intro h2{font-size:clamp(36px,9.5vw,48px);margin-bottom:24px}
-  .collection-grid{display:grid;grid-auto-flow:column;grid-auto-columns:min(82vw,320px);grid-template-columns:none;gap:16px;overflow-x:auto;margin-inline:calc(-1 * var(--page-gutter));padding:0 var(--page-gutter) 10px;scroll-padding-inline:var(--page-gutter);scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .collection-grid::-webkit-scrollbar{display:none}
-  .collection-card{min-width:0;scroll-snap-align:start}
-  .collection-card .photo{aspect-ratio:4/3}
+  .collection-grid{grid-template-columns:1fr;gap:24px}
+  .collection-card .photo{aspect-ratio:16/10}
   .collection-card .cap{padding-top:12px;padding-bottom:10px}
   .collection-card h3{font-size:29px}
   .collection-card .more{font-size:10px}
