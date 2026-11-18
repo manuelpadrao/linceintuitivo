@@ -145,9 +145,15 @@ html.proof-pending .proof{visibility:hidden}
 .contact-inner{display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(40px,7vw,96px);align-items:center}
 .contact h2{margin:24px 0}
 .contact .actions{display:flex;align-items:center;gap:clamp(20px,3vw,36px);flex-wrap:wrap}
-.contact-photo{position:relative;padding:7px;background:var(--metal);box-shadow:0 16px 42px rgba(120,95,40,.18);max-width:420px}
+.contact-people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(12px,2vw,24px);width:100%;max-width:500px}
+.contact-person{min-width:0;margin:0}
+.contact-photo{position:relative;padding:7px;background:var(--metal);box-shadow:0 16px 42px rgba(120,95,40,.18)}
 .contact-photo::before{content:"";position:absolute;inset:18px;border:1px solid rgba(246,227,161,.9);pointer-events:none;z-index:2}
 .contact-photo img{aspect-ratio:4/5;object-position:50% 14%;filter:brightness(1.04) contrast(1.03)}
+.contact-name{margin-top:12px;text-align:center;font-family:'Italiana',serif;font-size:clamp(20px,2vw,27px)}
+.contact-emails{display:grid;gap:8px;margin-top:24px;font-size:15px}
+.contact-emails a{width:fit-content;color:var(--ink);text-decoration:underline;text-decoration-color:var(--gold-line);text-underline-offset:4px}
+.contact-emails a:hover{color:var(--gold)}
 /* TESTIMONIALS */
 .testimonials{border-top:1px solid var(--line);text-align:center}
 .testimonials h2{margin:20px 0}
@@ -248,7 +254,7 @@ footer{border-top:4px solid #c9a24a;border-image:var(--metal) 1;padding-block:cl
   .feature-image{height:clamp(280px,48vw,420px)}
   .feature-content{padding:8px 0 0}
   .contact-inner,.atelier-inner{grid-template-columns:1fr;gap:42px}
-  .contact-photo{max-width:380px}
+  .contact-people{max-width:500px}
   .footer-top{align-items:flex-start}
   .footer-links{justify-content:flex-start}
   .map-frame iframe{height:clamp(280px,55vw,360px)}
@@ -300,7 +306,7 @@ footer{border-top:4px solid #c9a24a;border-image:var(--metal) 1;padding-block:cl
   .testimonial-group{gap:16px;padding-right:16px}
   .testimonial-card{flex-basis:78vw;min-height:230px;padding:24px 20px}
   .contact-inner,.atelier-inner{gap:28px}
-  .contact-photo{max-width:300px}
+  .contact-people{gap:12px}
   .contact h2,.atelier h2{font-size:clamp(38px,9.5vw,48px);margin:14px 0}
   .contact .actions{gap:16px}
   .contact .btn{padding:14px 18px;font-size:11px;letter-spacing:1px}
